@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NaijaCart | Tradition • Faith • Quality</title>
+
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <div class="top-bar">
+
+        <div class="delivery-message">
+            🚚 Free Delivery on orders over ₦50,000
+        </div>
+
+        <div class="top-links">
+            <a href="#">Track Order</a>
+            <span>|</span>
+            <a href="#">Help & Support</a>
+            <span>|</span>
+            <a href="#">English</a>
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MAIN HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-image">
+                <!-- Logo image -->
+            </div>
+
+            <div class="logo-text">
+
+                <h1>
+                    NAIJA<span>CART</span>
+                </h1>
+
+                <p>
+                    TRADITION • FAITH • QUALITY
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <div class="search-box">
+
+            <button class="category-select" type="button">
+                All Categories
+                <span>⌄</span>
+            </button>
+
+
+            <!-- CATEGORY DROPDOWN -->
+
+            <div class="category-dropdown" id="categoryDropdown">
+
+                <button type="button" class="category-option active" data-category="all">
+                    All Categories
+                </button>
+
+                <button type="button" class="category-option" data-category="Jalabias & Caps">
+                    Jalabias & Caps
+                </button>
+
+                <button type="button" class="category-option" data-category="Prayer Necessities & Perfumes">
+                    Prayer Necessities & Perfumes
+                </button>
+
+                <button type="button" class="category-option" data-category="Turbans">
+                    Turbans
+                </button>
+
+                <button type="button" class="category-option" data-category="Miswaks & Islamic Gift Sets">
+                    Miswaks & Islamic Gift Sets
+                </button>
+
+            </div>
+
+
+            <input type="search" id="searchInput" placeholder="Search for products...">
+
+
+            <button class="search-button" type="button">
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- =================================================
+             HEADER ACTIONS
+        ================================================== -->
+
+        <div class="header-actions">
+
+
+            <!-- =================================================
+                 ACCOUNT
+            ================================================== -->
+
+            <button class="header-action account-button" id="accountButton" type="button">
+
+                <span class="action-icon">
+                    ♙
+                </span>
+
+                <div>
+
+                    <strong id="accountName">
+                        Sign In
+                    </strong>
+
+                    <small id="accountText">
+                        My Account
+                    </small>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================================
+                 WISHLIST
+            ================================================== -->
+
+            <button class="header-action" id="wishlistButton" type="button">
+
+                <span class="action-icon">
+                    ♡
+                </span>
+
+                <div>
+
+                    <strong>
+                        Wishlist
+                    </strong>
+
+                    <small id="wishlistCount">
+                        0
+                    </small>
+
+                </div>
+
+            </button>
+
+
+            <!-- =================================================
+                 CART
+            ================================================== -->
+
+            <button class="header-action cart-button" id="cartButton" type="button">
+
+                <span class="action-icon">
+                    🛒
+                </span>
+
+                <div>
+
+                    <strong>
+                        Cart
+                    </strong>
+
+                    <small id="cartCount">
+                        0
+                    </small>
+
+                </div>
+
+            </button>
+
+
+
+
+    </header>
+
+
+
+    <!-- =====================================================
+         ACCOUNT MODAL
+    ====================================================== -->
+
+    <div class="account-modal" id="accountModal" hidden>
+
+
+        <div class="account-modal-overlay"></div>
+
+
+        <div class="account-modal-box" role="dialog" aria-modal="true" aria-labelledby="accountTitle">
+
+
+            <!-- CLOSE -->
+
+            <button class="account-close" id="accountClose" type="button" aria-label="Close account form">
+
+                ×
+
+            </button>
+
+
+
+            <!-- =================================================
+                 SIGN IN
+            ================================================== -->
+
+            <div class="account-panel signin-panel" id="signinPanel">
+
+
+                <div class="account-heading">
+
+                    <h2 id="accountTitle">
+                        Welcome Back
+                    </h2>
+
+                    <p>
+                        Sign in to your NaijaCart account
+                    </p>
+
+                </div>
+
+
+
+                <form class="account-form" id="signinForm">
+
+
+                    <div class="form-group">
+
+                        <label for="signinEmail">
+                            Email
+                        </label>
+
+                        <input type="email" id="signinEmail" name="email" placeholder="Enter your email" required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="signinPassword">
+                            Password
+                        </label>
+
+                        <input type="password" id="signinPassword" name="password" placeholder="Enter your password"
+                            required>
+
+                    </div>
+
+
+
+                    <p id="signinMessage" class="account-message">
+                    </p>
+
+
+
+                    <button type="submit" class="account-submit">
+
+                        Sign In
+
+                    </button>
+
+                </form>
+
+
+
+                <div class="account-switch">
+
+                    <p>
+                        Don't have an account?
+                    </p>
+
+                    <button type="button" id="showRegister">
+
+                        Create Account
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 REGISTER
+            ================================================== -->
+
+            <div class="account-panel register-panel" id="registerPanel" hidden>
+
+
+                <div class="account-heading">
+
+                    <h2>
+                        Create Account
+                    </h2>
+
+                    <p>
+                        Join NaijaCart today
+                    </p>
+
+                </div>
+
+
+
+                <form class="account-form" id="registerForm">
+
+
+                    <div class="form-group">
+
+                        <label for="registerName">
+                            Name
+                        </label>
+
+                        <input type="text" id="registerName" name="name" placeholder="Enter your name" required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="registerEmail">
+                            Email
+                        </label>
+
+                        <input type="email" id="registerEmail" name="email" placeholder="Enter your email" required>
+
+                    </div>
+                    <!-- =====================================================
+     ADDRESS
+===================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="registerAddress">
+                            Address
+                        </label>
+
+                        <input type="text" id="registerAddress" name="address" placeholder="Enter your address"
+                            required>
+
+                    </div>
+
+
+                    <!-- =====================================================
+     STATE
+===================================================== -->
+
+                    <div class="form-group">
+
+                        <label for="registerState">
+                            State
+                        </label>
+
+                        <input type="text" id="registerState" name="state" placeholder="Enter your state" required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="registerPassword">
+                            Password
+                        </label>
+
+                        <input type="password" id="registerPassword" name="password" placeholder="Create a password"
+                            required>
+
+                    </div>
+
+
+
+                    <div class="form-group">
+
+                        <label for="confirmPassword">
+                            Confirm Password
+                        </label>
+
+                        <input type="password" id="confirmPassword" name="confirm_password"
+                            placeholder="Confirm your password" required>
+
+                    </div>
+
+
+
+                    <p id="registerMessage" class="account-message">
+                    </p>
+
+
+
+                    <button type="submit" class="account-submit">
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+
+
+                <div class="account-switch">
+
+                    <p>
+                        Already have an account?
+                    </p>
+
+                    <button type="button" id="showSignin">
+
+                        Sign In
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOGGED-IN ACCOUNT
+            ================================================== -->
+
+            <div class="account-panel logged-in-panel" id="loggedInPanel" hidden>
+
+
+                <div class="account-heading">
+
+                    <h2>
+                        Welcome!
+                    </h2>
+
+                    <p>
+                        You are signed in to your NaijaCart account.
+                    </p>
+
+                </div>
+
+
+
+                <!-- USER INFORMATION -->
+
+                <div class="account-user-info">
+
+                    <p>
+                        <strong>Name:</strong>
+
+                        <span id="loggedInName">
+                        </span>
+                    </p>
+
+
+                    <p>
+                        <strong>Email:</strong>
+
+                        <span id="loggedInEmail">
+                        </span>
+                    </p>
+
+                </div>
+
+
+
+                <!-- SMALL SIGN OUT BUTTON -->
+
+                <button type="button" class="account-logout" id="logoutButton">
+
+                    Sign Out
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CART SIDEBAR
+    ====================================================== -->
+
+    <div class="cart-sidebar" id="cartSidebar" aria-hidden="true">
+
+
+        <div class="cart-overlay" id="cartOverlay">
+        </div>
+
+
+        <aside class="cart-panel" aria-label="Shopping cart">
+
+
+            <!-- CART HEADER -->
+
+            <div class="cart-header">
+
+                <div>
+
+                    <h2>
+                        Your Cart
+                    </h2>
+
+                    <p>
+
+                        <span id="cartItemCount">
+                            0
+                        </span>
+
+                        items
+
+                    </p>
+
+                </div>
+
+
+                <button class="cart-close" id="cartClose" type="button" aria-label="Close cart">
+
+                    ×
+
+                </button>
+
+            </div>
+
+
+
+            <!-- CART ITEMS -->
+
+            <div class="cart-items" id="cartItems">
+
+
+                <div class="empty-cart" id="emptyCart">
+
+
+                    <div class="empty-cart-icon">
+                        🛒
+                    </div>
+
+
+                    <h3>
+                        Your cart is empty
+                    </h3>
+
+
+                    <p>
+                        Add some products to your cart.
+                    </p>
+
+
+                    <button class="continue-shopping" id="continueShopping" type="button">
+
+                        Continue Shopping
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CART FOOTER -->
+
+            <div class="cart-footer">
+
+
+                <div class="cart-summary">
+
+
+                    <div class="cart-summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="cartSubtotal">
+                            ₦0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="cart-summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong id="cartDelivery">
+                            Calculated at checkout
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="cart-summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="cartTotal">
+                            ₦0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+
+                <button class="checkout-button" id="checkoutButton" type="button">
+
+                    Proceed to Checkout
+
+                </button>
+
+
+
+                <button class="cart-shopping-button" id="cartShoppingButton" type="button">
+
+                    Continue Shopping
+
+                </button>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+
+
+    <!-- =====================================================
+     CHECKOUT MODAL
+====================================================== -->
+
+    <div class="checkout-modal" id="checkoutModal" hidden>
+
+        <div class="checkout-overlay"></div>
+
+
+        <div class="checkout-box" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+
+
+            <!-- CLOSE -->
+            <button class="checkout-close" id="checkoutClose" type="button" aria-label="Close checkout">
+
+                ×
+
+            </button>
+
+
+            <!-- =================================================
+             CHECKOUT HEADER
+        ================================================== -->
+
+            <div class="checkout-heading">
+
+                <span class="checkout-label">
+                    NAIJA CART CHECKOUT
+                </span>
+
+                <h2 id="checkoutTitle">
+                    Complete Your Order
+                </h2>
+
+                <p>
+                    Enter your delivery details and choose how you'd like to pay.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+             CHECKOUT CONTENT
+        ================================================== -->
+
+            <div class="checkout-content">
+
+
+                <!-- =================================================
+                 LEFT SIDE
+            ================================================== -->
+
+                <div class="checkout-main">
+
+
+                    <!-- DELIVERY INFORMATION -->
+
+                    <div class="checkout-section">
+
+                        <div class="checkout-section-title">
+
+                            <span class="checkout-step">
+                                1
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Delivery Information
+                                </h3>
+
+                                <p>
+                                    Where should we deliver your order?
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <form class="checkout-form" id="checkoutForm">
+
+
+                            <!-- NAME -->
+
+                            <div class="form-group">
+
+                                <label for="checkoutName">
+                                    Full Name
+                                </label>
+
+                                <input type="text" id="checkoutName" name="full_name" placeholder="Enter your full name"
+                                    autocomplete="name" required>
+
+                            </div>
+
+
+                            <!-- EMAIL -->
+
+                            <div class="form-group">
+
+                                <label for="checkoutEmail">
+                                    Email Address
+                                </label>
+
+                                <input type="email" id="checkoutEmail" name="email" placeholder="you@example.com"
+                                    autocomplete="email" required>
+
+                            </div>
+
+
+                            <!-- ADDRESS -->
+
+                            <div class="form-group">
+
+                                <label for="checkoutLocation">
+                                    Delivery Address
+                                </label>
+
+                                <textarea id="checkoutLocation" name="location" rows="4"
+                                    placeholder="Enter your complete delivery address" autocomplete="street-address"
+                                    required></textarea>
+
+                            </div>
+
+
+                            <!-- =================================================
+                             PAYMENT
+                        ================================================== -->
+
+                            <div class="payment-section">
+
+                                <div class="checkout-section-title payment-title">
+
+                                    <span class="checkout-step">
+                                        2
+                                    </span>
+
+                                    <div>
+
+                                        <h3>
+                                            Payment Method
+                                        </h3>
+
+                                        <p>
+                                            Select your preferred payment method.
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- PAYMENT OPTIONS -->
+
+                                <div class="payment-options">
+
+
+                                    <!-- PAYSTACK -->
+
+                                    <button type="button" class="payment-option" data-payment="paystack">
+
+                                        <span class="payment-option-icon">
+                                            💳
+                                        </span>
+
+                                        <span class="payment-option-content">
+
+                                            <strong>
+                                                Paystack
+                                            </strong>
+
+                                            <small>
+                                                Pay securely online
+                                            </small>
+
+                                        </span>
+
+                                        <span class="payment-check">
+                                            ✓
+                                        </span>
+
+                                    </button>
+
+
+                                    <!-- FLUTTERWAVE -->
+
+                                    <button type="button" class="payment-option" data-payment="flutterwave">
+
+                                        <span class="payment-option-icon">
+                                            🌊
+                                        </span>
+
+                                        <span class="payment-option-content">
+
+                                            <strong>
+                                                Flutterwave
+                                            </strong>
+
+                                            <small>
+                                                Pay securely online
+                                            </small>
+
+                                        </span>
+
+                                        <span class="payment-check">
+                                            ✓
+                                        </span>
+
+                                    </button>
+
+
+                                    <!-- CASH -->
+
+                                    <button type="button" class="payment-option" data-payment="cash_on_delivery">
+
+                                        <span class="payment-option-icon">
+                                            💵
+                                        </span>
+
+                                        <span class="payment-option-content">
+
+                                            <strong>
+                                                Cash on Delivery
+                                            </strong>
+
+                                            <small>
+                                                Pay when your order arrives
+                                            </small>
+
+                                        </span>
+
+                                        <span class="payment-check">
+                                            ✓
+                                        </span>
+
+                                    </button>
+
+
+                                </div>
+
+
+                                <!-- HIDDEN PAYMENT VALUE -->
+
+                                <input type="hidden" id="paymentMethod" name="payment_method" required>
+
+
+                            </div>
+
+
+                            <!-- MESSAGE -->
+
+                            <p id="checkoutMessage" class="checkout-message" aria-live="polite">
+                            </p>
+
+
+                            <!-- PLACE ORDER -->
+
+                            <button type="submit" class="place-order-button">
+
+                                <span>
+                                    Place Order
+                                </span>
+
+                                <span class="place-order-arrow">
+                                    →
+                                </span>
+
+                            </button>
+
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                 RIGHT SIDE — ORDER SUMMARY
+            ================================================== -->
+
+                <aside class="checkout-summary">
+
+
+                    <div class="summary-heading">
+
+                        <span>
+                            ORDER SUMMARY
+                        </span>
+
+                        <h3>
+                            Your Order
+                        </h3>
+
+                    </div>
+
+
+                    <!-- PRODUCTS FROM CART WILL GO HERE -->
+
+                    <div class="checkout-items" id="checkoutItems">
+
+                        <!-- JavaScript inserts cart items here -->
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <!-- SUBTOTAL -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="checkoutSubtotal">
+                            ₦0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- DELIVERY -->
+
+                    <div class="summary-row">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <strong id="checkoutDelivery">
+                            Calculated at checkout
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-divider"></div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="summary-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="checkoutTotal">
+                            ₦0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- SECURITY -->
+
+                    <div class="checkout-security">
+
+                        <span>
+                            🔒
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Secure Checkout
+                            </strong>
+
+                            <p>
+                                Your order information is handled securely.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </aside>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- =====================================================
+     HERO SLIDER
+====================================================== -->
+
+    <section class="hero-slider" id="heroSlider">
+
+
+        <!-- =================================================
+         SLIDE 1
+    ================================================== -->
+
+        <div class="hero-slide active">
+
+            <div class="hero-content">
+
+                <p class="hero-small-title">
+                    AUTHENTIC • PREMIUM • TRUSTED
+                </p>
+
+                <h2>
+                    Elegance in Tradition,
+                    <span>
+                        Rooted in Faith
+                    </span>
+                </h2>
+
+                <p class="hero-description">
+
+                    Discover premium quality Jalabias,
+                    Caps, Turbans, Perfumes and Islamic
+                    essentials — made for comfort,
+                    style and everyday blessings.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <button class="shop-button" type="button">
+
+                        Shop Now
+
+                    </button>
+
+
+                    <button class="explore-button" type="button">
+
+                        Explore Categories →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img src="assents/images/first -slider.jpg" alt="NaijaCart Islamic collection">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+         SLIDE 2
+    ================================================== -->
+
+        <div class="hero-slide">
+
+            <div class="hero-content">
+
+                <p class="hero-small-title">
+                    PREMIUM ISLAMIC WEAR
+                </p>
+
+                <h2>
+
+                    Dress With
+                    <span>
+                        Purpose & Elegance
+                    </span>
+
+                </h2>
+
+                <p class="hero-description">
+
+                    Explore our collection of premium
+                    turbans, caps and traditional Islamic
+                    clothing designed for comfort and style.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <button class="shop-button" type="button">
+
+                        Shop Now
+
+                    </button>
+
+
+                    <button class="explore-button" type="button">
+
+                        Explore Categories →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img src="assents/images/second slider.jpg" alt="Royal blue turban">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+         SLIDE 3
+    ================================================== -->
+
+        <div class="hero-slide">
+
+            <div class="hero-content">
+
+                <p class="hero-small-title">
+                    FAITH • STYLE • QUALITY
+                </p>
+
+                <h2>
+
+                    Essentials For
+                    <span>
+                        Every Day
+                    </span>
+
+                </h2>
+
+                <p class="hero-description">
+
+                    From beautiful turbans and caps to
+                    perfumes, miswaks and Islamic gift sets,
+                    find something special at NaijaCart.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+                    <button class="shop-button" type="button">
+
+                        Shop Now
+
+                    </button>
+
+
+                    <button class="explore-button" type="button">
+
+                        Explore Categories →
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="hero-image">
+
+                <img src="assents/images/third slider.jpg" alt="Cream luxury turban">
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+         PREVIOUS BUTTON
+    ================================================== -->
+
+        <button class="slider-arrow slider-previous" id="sliderPrevious" type="button" aria-label="Previous slide">
+
+            ‹
+
+        </button>
+
+
+
+        <!-- =================================================
+         NEXT BUTTON
+    ================================================== -->
+
+        <button class="slider-arrow slider-next" id="sliderNext" type="button" aria-label="Next slide">
+
+            ›
+
+        </button>
+
+
+
+        <!-- =================================================
+         SLIDER DOTS
+    ================================================== -->
+
+        <div class="slider-dots">
+
+            <button class="slider-dot active" type="button" aria-label="Go to slide 1">
+            </button>
+
+            <button class="slider-dot" type="button" aria-label="Go to slide 2">
+            </button>
+
+            <button class="slider-dot" type="button" aria-label="Go to slide 3">
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+             CATEGORIES
+        ================================================== -->
+
+    <section class="categories-section" id="categories">
+
+
+        <div class="section-heading">
+
+            <h2>
+                Shop By Category
+            </h2>
+
+            <p>
+                Explore our collection
+            </p>
+
+        </div>
+
+
+
+        <div class="category-buttons">
+
+
+            <button class="category-button active" type="button" data-category="all">
+
+                All
+
+            </button>
+
+
+            <button class="category-button" type="button" data-category="Jalabias & Caps">
+
+                Jalabias & Caps
+
+            </button>
+
+
+            <button class="category-button" type="button" data-category="Prayer Necessities & Perfumes">
+
+                Prayer Necessities & Perfumes
+
+            </button>
+
+
+            <button class="category-button" type="button" data-category="Turbans">
+
+                Turbans
+
+            </button>
+
+
+            <button class="category-button" type="button" data-category="Miswaks & Islamic Gift Sets">
+
+                Miswaks & Islamic Gift Sets
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+             PRODUCTS
+        ================================================== -->
+
+    <section class="products-section" id="products">
+
+
+        <div class="section-heading products-heading">
+
+            <div>
+
+                <h2>
+                    Our Products
+                </h2>
+
+                <p>
+                    Find something special for you
+                </p>
+
+            </div>
+
+
+            <!-- SORT PRODUCTS -->
+
+            <div class="product-sort">
+
+                <label for="sortProducts">
+                    Sort By:
+                </label>
+
+                <select id="sortProducts">
+
+                    <option value="default">
+                        Default
+                    </option>
+
+                    <option value="price-low">
+                        Price: Low to High
+                    </option>
+
+                    <option value="price-high">
+                        Price: High to Low
+                    </option>
+
+                    <option value="name-az">
+                        Name: A to Z
+                    </option>
+
+                    <option value="name-za">
+                        Name: Z to A
+                    </option>
+
+                    <option value="newest">
+                        Newest
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="products-grid" id="productsGrid">
+
+            <!-- Products inserted by products.js -->
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+             OFFER
+        ================================================== -->
+
+    <section class="offer-section">
+
+
+        <div class="offer-content">
+
+            <span class="offer-label">
+                LIMITED TIME OFFER
+            </span>
+
+
+            <h2>
+                Get 20% Off
+            </h2>
+
+
+            <p>
+                On Your First Order
+            </p>
+
+
+            <div class="coupon">
+
+                Use Code:
+
+                <strong>
+                    NAIJA20
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="timer">
+
+            <span>
+                <strong id="offerDays">02</strong>
+                <small>Days</small>
+            </span>
+
+            <span>
+                <strong id="offerHours">14</strong>
+                <small>Hours</small>
+            </span>
+
+            <span>
+                <strong id="offerMinutes">36</strong>
+                <small>Mins</small>
+            </span>
+
+            <span>
+                <strong id="offerSeconds">48</strong>
+                <small>Secs</small>
+            </span>
+
+    </section>
+
+
+
+    <!-- =================================================
+             BENEFITS
+        ================================================== -->
+
+    <section class="benefits-section">
+
+
+        <div class="benefit">
+
+            <span class="benefit-icon">
+                🚚
+            </span>
+
+            <div>
+
+                <h3>
+                    Free Delivery
+                </h3>
+
+                <p>
+                    On orders over ₦50,000
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="benefit">
+
+            <span class="benefit-icon">
+                🔒
+            </span>
+
+            <div>
+
+                <h3>
+                    Secure Payment
+                </h3>
+
+                <p>
+                    100% secure & safe
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="benefit">
+
+            <span class="benefit-icon">
+                ✓
+            </span>
+
+            <div>
+
+                <h3>
+                    Premium Quality
+                </h3>
+
+                <p>
+                    Satisfaction guaranteed
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="benefit">
+
+            <span class="benefit-icon">
+                ↻
+            </span>
+
+            <div>
+
+                <h3>
+                    Easy Returns
+                </h3>
+
+                <p>
+                    30-day return policy
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="benefit">
+
+            <span class="benefit-icon">
+                ☎
+            </span>
+
+            <div>
+
+                <h3>
+                    24/7 Support
+                </h3>
+
+                <p>
+                    We're here to help
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    </main>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-content">
+
+
+            <!-- BRAND -->
+
+            <div class="footer-brand">
+
+
+                <div class="footer-logo">
+
+
+                    <div class="footer-logo-image">
+                        <!-- Logo -->
+                    </div>
+
+
+                    <div>
+
+                        <h2>
+                            NAIJA<span>CART</span>
+                        </h2>
+
+                        <p>
+                            TRADITION • FAITH • QUALITY
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <p class="footer-description">
+
+                    Your trusted store for authentic Islamic
+                    clothing, fragrances and essentials.
+
+                </p>
+
+
+
+                <div class="social-links">
+
+                    <a href="#">
+                        Facebook
+                    </a>
+
+                    <a href="#">
+                        Instagram
+                    </a>
+
+                    <a href="#">
+                        TikTok
+                    </a>
+
+                    <a href="#">
+                        X
+                    </a>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SHOP -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Shop
+                </h3>
+
+                <a href="#products">
+                    All Products
+                </a>
+
+                <a href="#products">
+                    Jalabias & Caps
+                </a>
+
+                <a href="#products">
+                    Prayer Necessities & Perfumes
+                </a>
+
+                <a href="#products">
+                    Turbans
+                </a>
+
+                <a href="#products">
+                    Miswaks & Gift Sets
+                </a>
+
+            </div>
+
+
+
+            <!-- CUSTOMER SERVICE -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Customer Service
+                </h3>
+
+                <a href="#">
+                    Track Order
+                </a>
+
+                <a href="#">
+                    Shipping & Delivery
+                </a>
+
+                <a href="#">
+                    Returns & Refunds
+                </a>
+
+                <a href="#">
+                    FAQs
+                </a>
+
+                <a href="#">
+                    Help & Support
+                </a>
+
+            </div>
+
+
+
+            <!-- INFORMATION -->
+
+            <div class="footer-column">
+
+                <h3>
+                    Information
+                </h3>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Our Story
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms & Conditions
+                </a>
+
+                <a href="#">
+                    Contact Us
+                </a>
+
+            </div>
+
+
+
+            <!-- NEWSLETTER -->
+
+            <div class="newsletter">
+
+                <h3>
+                    Newsletter
+                </h3>
+
+                <p>
+
+                    Subscribe to get updates on new
+                    arrivals and exclusive offers.
+
+                </p>
+
+
+                <form>
+
+                    <input type="email" placeholder="Enter your email">
+
+
+                    <button type="submit">
+                        Subscribe
+                    </button>
+
+                </form>
+
+
+
+                <div class="payment-methods">
+
+                    <span>VISA</span>
+                    <span>MASTERCARD</span>
+                    <span>Paystack</span>
+                    <span>Flutterwave</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- COPYRIGHT -->
+
+        <div class="copyright">
+
+            <p>
+                © 2026 NaijaCart.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+    <script src="https://js.paystack.co/v2/inline.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/offer.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
