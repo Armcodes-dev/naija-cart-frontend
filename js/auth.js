@@ -38,11 +38,7 @@ const TOKEN_STORAGE_KEY = "naijaCartToken";
 //     https://naija-cart-backend.onrender.com/api
 // ============================================================
 
-const API_BASE_URL =
-    window.location.hostname === "localhost" ||
-    window.location.hostname === "127.0.0.1"
-        ? "http://127.0.0.1:5000/api"
-        : "https://naija-cart-backend.onrender.com/api";
+
 
 
 // ============================================================

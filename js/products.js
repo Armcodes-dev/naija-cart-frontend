@@ -30,8 +30,7 @@ const productsGrid =
 // CATEGORY SELECT
 // ============================================================
 
-const categorySelect =
-    document.querySelector(".category-select");
+
 
 
 // ============================================================
