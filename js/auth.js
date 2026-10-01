@@ -53,12 +53,7 @@ function getReturnUrl() {
         window.location.hash;
 
     // Never return an admin to the normal shop page
-    if (
-        currentPath.endsWith("/admin.html") ||
-        currentPath.endsWith("admin.html")
-    ) {
-        return "index.html";
-    }
+    
 
     return currentPath;
 }
@@ -253,7 +248,6 @@ function isAdmin() {
 // ============================================================
 // REDIRECT AFTER LOGIN
 // ============================================================
-
 function redirectAfterLogin() {
 
     const user =
@@ -262,6 +256,10 @@ function redirectAfterLogin() {
     if (!user) {
         return;
     }
+
+    console.log("LOGIN USER:", user);
+    console.log("is_admin value:", user.is_admin);
+    console.log("is_admin type:", typeof user.is_admin);
 
     // ADMIN
     if (user.is_admin === true) {
