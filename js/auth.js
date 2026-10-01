@@ -9,7 +9,7 @@
 // - Checking the current user
 // - Admin redirect
 // - Account UI
-// - Notifying cart and wishlist when account changes
+// - Cart/wishlist auth notifications
 // ============================================================
 
 
@@ -29,13 +29,24 @@ const TOKEN_STORAGE_KEY = "naijaCartToken";
 
 
 // ============================================================
-// GET RETURN URL
+// API BASE URL
 // ============================================================
+// Local computer:
+//     http://127.0.0.1:5000/api
 //
-// Saves the page the customer was on before signing in.
-//
-// Admins will NOT use this URL.
-// Admins always go to admin.html.
+// Live website:
+//     https://naija-cart-backend.onrender.com/api
+// ============================================================
+
+const API_BASE_URL =
+    window.location.hostname === "localhost" ||
+    window.location.hostname === "127.0.0.1"
+        ? "http://127.0.0.1:5000/api"
+        : "https://naija-cart-backend.onrender.com/api";
+
+
+// ============================================================
+// GET RETURN URL
 // ============================================================
 
 function getReturnUrl() {
@@ -46,19 +57,14 @@ function getReturnUrl() {
         window.location.hash;
 
     // Never return an admin to the normal shop page
-    // through this mechanism.
-
     if (
         currentPath.endsWith("/admin.html") ||
         currentPath.endsWith("admin.html")
     ) {
-
         return "index.html";
-
     }
 
     return currentPath;
-
 }
 
 
@@ -75,7 +81,6 @@ function saveReturnUrl() {
         "naijaCartReturnUrl",
         returnUrl
     );
-
 }
 
 
@@ -88,7 +93,6 @@ function getSavedReturnUrl() {
     return sessionStorage.getItem(
         "naijaCartReturnUrl"
     );
-
 }
 
 
@@ -101,16 +105,11 @@ function clearSavedReturnUrl() {
     sessionStorage.removeItem(
         "naijaCartReturnUrl"
     );
-
 }
 
 
 // ============================================================
 // NOTIFY AUTH CHANGE
-// ============================================================
-//
-// This tells cart.js and products.js that the
-// logged-in account has changed.
 // ============================================================
 
 function notifyAuthChanged() {
@@ -118,7 +117,6 @@ function notifyAuthChanged() {
     document.dispatchEvent(
         new CustomEvent("authChanged")
     );
-
 }
 
 
@@ -133,15 +131,12 @@ function getCurrentUser() {
             USER_STORAGE_KEY
         );
 
-
     if (!savedUser) {
 
         currentUser = null;
 
         return null;
-
     }
-
 
     try {
 
@@ -159,18 +154,14 @@ function getCurrentUser() {
             error
         );
 
-
         localStorage.removeItem(
             USER_STORAGE_KEY
         );
 
-
         currentUser = null;
 
         return null;
-
     }
-
 }
 
 
@@ -183,7 +174,6 @@ function getAuthToken() {
     return localStorage.getItem(
         TOKEN_STORAGE_KEY
     );
-
 }
 
 
@@ -195,21 +185,17 @@ function saveUser(user, token) {
 
     currentUser = user;
 
-
     localStorage.setItem(
         USER_STORAGE_KEY,
         JSON.stringify(user)
     );
-
 
     localStorage.setItem(
         TOKEN_STORAGE_KEY,
         token
     );
 
-
     notifyAuthChanged();
-
 }
 
 
@@ -221,24 +207,19 @@ function logoutUser() {
 
     currentUser = null;
 
-
     localStorage.removeItem(
         USER_STORAGE_KEY
     );
-
 
     localStorage.removeItem(
         TOKEN_STORAGE_KEY
     );
 
-
     console.log(
         "User logged out"
     );
 
-
     notifyAuthChanged();
-
 }
 
 
@@ -252,7 +233,6 @@ function isLoggedIn() {
         getCurrentUser() !== null &&
         getAuthToken() !== null
     );
-
 }
 
 
@@ -265,71 +245,57 @@ function isAdmin() {
     const user =
         getCurrentUser();
 
-
     if (!user) {
 
         return false;
-
     }
 
-
     return user.is_admin === true;
-
 }
 
 
 // ============================================================
 // REDIRECT AFTER LOGIN
 // ============================================================
-//
-// Admin:
-//     → admin.html
-//
-// Normal customer:
-//     → page they were previously visiting
-//
-// If no previous page exists:
-//     → index.html
-// ============================================================
 
 function redirectAfterLogin() {
 
-    const user = getCurrentUser();
+    const user =
+        getCurrentUser();
 
     if (!user) {
         return;
     }
 
-    // ============================================
     // ADMIN
-    // ============================================
-
     if (user.is_admin === true) {
 
         clearSavedReturnUrl();
 
-        window.location.href = "admin.html";
+        window.location.href =
+            "admin.html";
 
         return;
     }
 
-    // ============================================
     // CUSTOMER
-    // ============================================
-
-    const returnUrl = getSavedReturnUrl();
+    const returnUrl =
+        getSavedReturnUrl();
 
     clearSavedReturnUrl();
 
     if (returnUrl) {
 
-        window.location.href = returnUrl;
+        window.location.href =
+            returnUrl;
 
         return;
     }
 
-    window.location.href = "index.html";
+    window.location.href =
+        "index.html";
 }
+
 
 // ============================================================
 // REGISTER USER
@@ -341,7 +307,7 @@ async function registerUser(userData) {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/auth/register",
+                `${API_BASE_URL}/auth/register`,
                 {
                     method: "POST",
 
@@ -366,15 +332,12 @@ async function registerUser(userData) {
 
                         state:
                             userData.state
-
                     })
                 }
             );
 
-
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -382,15 +345,12 @@ async function registerUser(userData) {
                 data.error ||
                 "Registration failed"
             );
-
         }
-
 
         console.log(
             "Registration successful:",
             data
         );
-
 
         return data;
 
@@ -404,10 +364,9 @@ async function registerUser(userData) {
         );
 
         throw error;
-
     }
-
 }
+
 
 // ============================================================
 // LOGIN USER
@@ -419,7 +378,7 @@ async function loginUser(userData) {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/auth/login",
+                `${API_BASE_URL}/auth/login`,
                 {
                     method: "POST",
 
@@ -435,15 +394,12 @@ async function loginUser(userData) {
 
                         password:
                             userData.password
-
                     })
                 }
             );
 
-
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -451,23 +407,18 @@ async function loginUser(userData) {
                 data.error ||
                 "Login failed"
             );
-
         }
 
-
-        // Save account and token.
-
+        // Save account and token
         saveUser(
             data.user,
             data.token
         );
 
-
         console.log(
             "Login successful:",
             data.user
         );
-
 
         return data;
 
@@ -481,22 +432,12 @@ async function loginUser(userData) {
         );
 
         throw error;
-
     }
-
 }
 
 
 // ============================================================
 // CHECK CURRENT USER WITH BACKEND
-// ============================================================
-//
-// IMPORTANT:
-// The browser's saved is_admin value is NOT the final
-// security check.
-//
-// The backend /api/auth/me endpoint verifies the token
-// and returns the real user information.
 // ============================================================
 
 async function checkCurrentUser() {
@@ -504,58 +445,45 @@ async function checkCurrentUser() {
     const token =
         getAuthToken();
 
-
     if (!token) {
 
         return null;
-
     }
-
 
     try {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/auth/me",
+                `${API_BASE_URL}/auth/me`,
                 {
                     method: "GET",
 
                     headers: {
-
                         "Authorization":
                             `Bearer ${token}`
-
                     }
-
                 }
             );
 
-
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
             logoutUser();
 
             return null;
-
         }
-
 
         currentUser =
             data.user;
-
 
         localStorage.setItem(
             USER_STORAGE_KEY,
             JSON.stringify(data.user)
         );
 
-
         notifyAuthChanged();
-
 
         return data.user;
 
@@ -569,21 +497,12 @@ async function checkCurrentUser() {
         );
 
         return null;
-
     }
-
 }
 
 
 // ============================================================
 // PROTECT ADMIN PAGE
-// ============================================================
-//
-// This function will be used by admin.html later.
-//
-// It checks the backend's /api/auth/me response.
-// If the user is not an admin, they are sent back to
-// the normal shop.
 // ============================================================
 
 async function checkAdminAccess() {
@@ -591,39 +510,31 @@ async function checkAdminAccess() {
     const token =
         getAuthToken();
 
-
     if (!token) {
 
         window.location.href =
             "index.html";
 
         return null;
-
     }
-
 
     try {
 
         const response =
             await fetch(
-                "http://127.0.0.1:5000/api/auth/me",
+                `${API_BASE_URL}/auth/me`,
                 {
                     method: "GET",
 
                     headers: {
-
                         "Authorization":
                             `Bearer ${token}`
-
                     }
-
                 }
             );
 
-
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -633,27 +544,17 @@ async function checkAdminAccess() {
                 "index.html";
 
             return null;
-
         }
-
-
-        // Update local user information
-        // using the backend response.
 
         currentUser =
             data.user;
-
 
         localStorage.setItem(
             USER_STORAGE_KEY,
             JSON.stringify(data.user)
         );
 
-
-        // ====================================================
         // REAL ADMIN CHECK
-        // ====================================================
-
         if (
             data.user.is_admin !== true
         ) {
@@ -662,20 +563,15 @@ async function checkAdminAccess() {
                 "Admin access denied."
             );
 
-
             window.location.href =
                 "index.html";
 
-
             return null;
-
         }
-
 
         console.log(
             "Admin access verified."
         );
-
 
         return data.user;
 
@@ -688,15 +584,11 @@ async function checkAdminAccess() {
             error
         );
 
-
         window.location.href =
             "index.html";
 
-
         return null;
-
     }
-
 }
 
 
@@ -705,7 +597,6 @@ async function checkAdminAccess() {
 // ============================================================
 
 getCurrentUser();
-
 
 console.log(
     "auth.js is working correctly."
@@ -721,12 +612,10 @@ const accountButton =
         "accountButton"
     );
 
-
 const accountModal =
     document.getElementById(
         "accountModal"
     );
-
 
 const accountClose =
     document.getElementById(
@@ -740,7 +629,6 @@ const accountName =
     document.getElementById(
         "accountName"
     );
-
 
 const accountText =
     document.getElementById(
@@ -764,22 +652,17 @@ if (
             if (!isLoggedIn()) {
 
                 saveReturnUrl();
-
             }
 
             accountModal.hidden = false;
-
 
             document.body.classList.add(
                 "account-open"
             );
 
-
             updateAccountUI();
-
         }
     );
-
 }
 
 
@@ -798,14 +681,11 @@ if (
 
             accountModal.hidden = true;
 
-
             document.body.classList.remove(
                 "account-open"
             );
-
         }
     );
-
 }
 
 
@@ -818,7 +698,6 @@ const accountOverlay =
         ".account-modal-overlay"
     );
 
-
 if (
     accountOverlay &&
     accountModal
@@ -830,14 +709,11 @@ if (
 
             accountModal.hidden = true;
 
-
             document.body.classList.remove(
                 "account-open"
             );
-
         }
     );
-
 }
 
 
@@ -850,18 +726,15 @@ const showRegister =
         "showRegister"
     );
 
-
 const showSignin =
     document.getElementById(
         "showSignin"
     );
 
-
 const signinPanel =
     document.getElementById(
         "signinPanel"
     );
-
 
 const registerPanel =
     document.getElementById(
@@ -886,10 +759,8 @@ if (
             signinPanel.hidden = true;
 
             registerPanel.hidden = false;
-
         }
     );
-
 }
 
 
@@ -910,10 +781,8 @@ if (
             registerPanel.hidden = true;
 
             signinPanel.hidden = false;
-
         }
     );
-
 }
 
 
@@ -926,7 +795,6 @@ const registerForm =
         "registerForm"
     );
 
-
 if (registerForm) {
 
     registerForm.addEventListener(
@@ -935,48 +803,40 @@ if (registerForm) {
 
             event.preventDefault();
 
-
             const name =
                 document.getElementById(
                     "registerName"
                 ).value.trim();
-
 
             const email =
                 document.getElementById(
                     "registerEmail"
                 ).value.trim();
 
-
             const password =
                 document.getElementById(
                     "registerPassword"
                 ).value;
-
 
             const confirmPassword =
                 document.getElementById(
                     "confirmPassword"
                 ).value;
 
-
             const address =
                 document.getElementById(
                     "registerAddress"
                 ).value.trim();
-
 
             const state =
                 document.getElementById(
                     "registerState"
                 ).value.trim();
 
-
             const registerMessage =
                 document.getElementById(
                     "registerMessage"
                 );
-
 
             // CHECK PASSWORDS
 
@@ -989,49 +849,42 @@ if (registerForm) {
                     "Passwords do not match.";
 
                 return;
-
             }
-
 
             try {
 
                 registerMessage.textContent =
                     "Creating account...";
 
-
                 const data =
-    await registerUser({
+                    await registerUser({
 
-        name:
-            name,
+                        name:
+                            name,
 
-        email:
-            email,
+                        email:
+                            email,
 
-        password:
-            password,
+                        password:
+                            password,
 
-        address:
-            address,
+                        address:
+                            address,
 
-        state:
-            state
-
-    });
-
+                        state:
+                            state
+                    });
 
                 registerMessage.textContent =
                     data.message ||
                     "Account created successfully!";
-
 
                 console.log(
                     "Account created:",
                     data
                 );
 
-
-                // Go back to sign in.
+                // Go back to sign in
 
                 registerPanel.hidden =
                     true;
@@ -1046,17 +899,13 @@ if (registerForm) {
                 registerMessage.textContent =
                     error.message;
 
-
                 console.error(
                     "Registration failed:",
                     error
                 );
-
             }
-
         }
     );
-
 }
 
 
@@ -1069,18 +918,15 @@ const loggedInPanel =
         "loggedInPanel"
     );
 
-
 const loggedInName =
     document.getElementById(
         "loggedInName"
     );
 
-
 const loggedInEmail =
     document.getElementById(
         "loggedInEmail"
     );
-
 
 const logoutButton =
     document.getElementById(
@@ -1097,14 +943,10 @@ function updateAccountUI() {
     const user =
         getCurrentUser();
 
-
     const token =
         getAuthToken();
 
-
-    // ========================================================
     // USER IS LOGGED IN
-    // ========================================================
 
     if (
         user &&
@@ -1117,9 +959,7 @@ function updateAccountUI() {
 
             accountName.textContent =
                 user.name;
-
         }
-
 
         // HEADER TEXT
 
@@ -1127,9 +967,7 @@ function updateAccountUI() {
 
             accountText.textContent =
                 "My Account";
-
         }
-
 
         // HIDE SIGN-IN PANEL
 
@@ -1137,9 +975,7 @@ function updateAccountUI() {
 
             signinPanel.hidden =
                 true;
-
         }
-
 
         // HIDE REGISTER PANEL
 
@@ -1147,9 +983,7 @@ function updateAccountUI() {
 
             registerPanel.hidden =
                 true;
-
         }
-
 
         // SHOW LOGGED-IN PANEL
 
@@ -1157,9 +991,7 @@ function updateAccountUI() {
 
             loggedInPanel.hidden =
                 false;
-
         }
-
 
         // USER NAME
 
@@ -1167,9 +999,7 @@ function updateAccountUI() {
 
             loggedInName.textContent =
                 user.name;
-
         }
-
 
         // USER EMAIL
 
@@ -1177,15 +1007,10 @@ function updateAccountUI() {
 
             loggedInEmail.textContent =
                 user.email;
-
         }
-
     }
 
-
-    // ========================================================
     // USER IS LOGGED OUT
-    // ========================================================
 
     else {
 
@@ -1195,17 +1020,13 @@ function updateAccountUI() {
 
             accountName.textContent =
                 "Sign In";
-
         }
-
 
         if (accountText) {
 
             accountText.textContent =
                 "My Account";
-
         }
-
 
         // HIDE LOGGED-IN PANEL
 
@@ -1213,9 +1034,7 @@ function updateAccountUI() {
 
             loggedInPanel.hidden =
                 true;
-
         }
-
 
         // SHOW SIGN-IN PANEL
 
@@ -1223,21 +1042,16 @@ function updateAccountUI() {
 
             signinPanel.hidden =
                 false;
-
         }
 
-
-        // Make sure register panel is hidden.
+        // HIDE REGISTER PANEL
 
         if (registerPanel) {
 
             registerPanel.hidden =
                 true;
-
         }
-
     }
-
 }
 
 
@@ -1253,17 +1067,13 @@ if (logoutButton) {
 
             logoutUser();
 
-
             updateAccountUI();
-
 
             console.log(
                 "Logged out successfully."
             );
-
         }
     );
-
 }
 
 
@@ -1276,12 +1086,10 @@ const signinForm =
         "signinForm"
     );
 
-
 const signinMessage =
     document.getElementById(
         "signinMessage"
     );
-
 
 if (signinForm) {
 
@@ -1291,18 +1099,15 @@ if (signinForm) {
 
             event.preventDefault();
 
-
             const email =
                 document.getElementById(
                     "signinEmail"
                 ).value.trim();
 
-
             const password =
                 document.getElementById(
                     "signinPassword"
                 ).value;
-
 
             try {
 
@@ -1310,9 +1115,7 @@ if (signinForm) {
 
                     signinMessage.textContent =
                         "Signing in...";
-
                 }
-
 
                 const data =
                     await loginUser({
@@ -1322,42 +1125,28 @@ if (signinForm) {
 
                         password:
                             password
-
                     });
-
 
                 console.log(
                     "LOGIN SUCCESS:",
                     data
                 );
 
-
                 if (signinMessage) {
 
                     signinMessage.textContent =
                         "Login successful!";
-
                 }
 
-
-                // Update account UI.
+                // Update account UI
 
                 updateAccountUI();
 
-
-                // Clear form.
+                // Clear form
 
                 signinForm.reset();
 
-
-                // =================================================
                 // REDIRECT
-                // =================================================
-                //
-                // Admin → admin.html
-                // Customer → previous page
-                //
-                // =================================================
 
                 setTimeout(
                     function () {
@@ -1377,19 +1166,14 @@ if (signinForm) {
                     error
                 );
 
-
                 if (signinMessage) {
 
                     signinMessage.textContent =
                         error.message;
-
                 }
-
             }
-
         }
     );
-
 }
 
 
@@ -1402,11 +1186,6 @@ updateAccountUI();
 
 // ============================================================
 // INITIAL AUTH CHANGE NOTIFICATION
-// ============================================================
-//
-// Gives cart.js and products.js a chance to
-// load the correct account's data after all
-// scripts have been loaded.
 // ============================================================
 
 setTimeout(
